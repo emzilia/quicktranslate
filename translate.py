@@ -18,7 +18,7 @@ def arg_check() -> str:
         sys.exit(1)
     elif len(sys.argv) == 2 and sys.argv[1] != 'usage':
         print(
-            "Error: Invalid 1st argument or no text to translate"
+            "Error: If not using 'usage', two arguments are required."
         )
         sys.exit(1)
     elif len(sys.argv) > 3:
@@ -28,18 +28,19 @@ def arg_check() -> str:
         )
         sys.exit(1)
 
-    if sys.argv[1] == 'usage':
-        flag: str = "USAGE"
-    elif sys.argv[1] == 'se':
-        flag: str = "EN-US"
-    elif sys.argv[1] == 'es':
-        flag: str = "ES"
-    else:
-        print(
-            "Error: First arg must be 'se' or 'es' for translation to "
-            "English or Spanish respectively.\n'usage' to see api key usage."
-        )
-        sys.exit(1)
+    match sys.argv[1]:
+        case 'usage':
+            flag: str = "USAGE"
+        case 'se':
+            flag: str = "EN-US"
+        case 'es':
+            flag: str = "ES"
+        case _:
+            print(
+                "Error: First arg must be 'se' or 'es' for translation to "
+                "English or Spanish respectively.\n'usage' to see api key usage."
+            )
+            sys.exit(1)
 
     return flag
    
