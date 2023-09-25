@@ -3,7 +3,8 @@
 import deepl, os, sys
 
 # limits input to save on api calls, first argument determines which way
-# the translation goes, es for English to Spanish or se for Spanish to English
+# the translation goes, 'es' for english to spanish or 'se' for spanish to english
+# 'usage' shows api key usage.
 def arg_check() -> str:
     if len(sys.argv) == 1:
         print(
@@ -17,8 +18,7 @@ def arg_check() -> str:
         sys.exit(1)
     elif len(sys.argv) == 2 and sys.argv[1] != 'usage':
         print(
-            "Error: This program requires at least two arguments to "
-            "function"
+            "Error: Invalid 2nd argument. Valid arguments: es, se, usage"
         )
         sys.exit(1)
     elif len(sys.argv) > 3:
@@ -37,39 +37,38 @@ def arg_check() -> str:
     else:
         print(
             "Error: First arg must be 'se' or 'es' for translation to "
-            "English or Spanish respectively"
+            "English or Spanish respectively.\n'usage' to see api key usage."
         )
         sys.exit(1)
 
     return flag
    
-# requires a DeepL API key, which are free to acquire, however you must
-# provide billing information. Currently set as an env variable
-def init_deepl():
+# requires a DeepL api key, which is free to acquire. checks api usage and
+# closes if it's reached its limit, shows usage data if flag is set
+# set as an env variable
+def init_deepl(flag):
     auth_key: str = os.environ["DEEPL_API_KEY"]
     translator = deepl.Translator(auth_key)
+    api_check(translator, flag)
     return translator
 
-# checks the usage of the DeepL free API calls
-def api_check(translator) -> None:
+# checks the usage of the DeepL api calls
+def api_check(translator, flag) -> None:
     usage = translator.get_usage()
     if usage.any_limit_reached:
         print(
-            "This DeepL API key has reached its usage limit."
+            "Error: This DeepL API key has reached its usage limit."
         )
         sys.exit(1)
-    else:
+    if flag == 'USAGE':
         print(
-            f"Usage: {usage.character.count} / {usage.character.limit}"
+            f"Usage: {usage.character.count} / {usage.character.limit} "
+            "characters"
         )
         sys.exit(1)
 
-# based on the flag set by the first argument, text is translated as single
-# words or as strings built by successive script args, API usage can
-# also be shown
+# text is translated based on the flag previously set.
 def trans_input(translator, flag) -> str:
-    if flag == "USAGE":
-        api_check(trans)
     newword: str = translator.translate_text(
         sys.argv[2],
         target_lang=flag
@@ -78,7 +77,7 @@ def trans_input(translator, flag) -> str:
 
 if __name__ == "__main__":
     flag: str = arg_check()
-    trans = init_deepl()
+    trans = init_deepl(flag)
     output: str = trans_input(trans, flag)
 
     print(output)
