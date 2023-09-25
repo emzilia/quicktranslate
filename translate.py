@@ -2,9 +2,8 @@
 
 import deepl, os, sys
 
-# first argument determines which way
-# the translation goes, 'es' for english to spanish or 'se' for spanish to english
-# 'usage' shows api key usage.
+# first argument determines which way the translation goes, 'es' for english
+# to spanish or 'se' for spanish to english, 'usage' shows api key usage.
 def arg_check() -> str:
     if len(sys.argv) == 1:
         print(
