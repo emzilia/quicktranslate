@@ -4,7 +4,7 @@ import deepl, os, sys
 
 # limits input to save on api calls, first argument determines which way
 # the translation goes, es for English to Spanish or se for Spanish to English
-def arg_check():
+def arg_check() -> str:
     if len(sys.argv) == 1:
         print(
             "Usage: tran se \"<word of phrase>\"\n\t"
@@ -29,11 +29,11 @@ def arg_check():
         sys.exit(1)
 
     if sys.argv[1] == 'usage':
-        flag = "USAGE"
+        flag: str = "USAGE"
     elif sys.argv[1] == 'se':
-        flag = "EN-US"
+        flag: str = "EN-US"
     elif sys.argv[1] == 'es':
-        flag = "ES"
+        flag: str = "ES"
     else:
         print(
             "Error: First arg must be 'se' or 'es' for translation to "
@@ -46,36 +46,39 @@ def arg_check():
 # requires a DeepL API key, which are free to acquire, however you must
 # provide billing information. Currently set as an env variable
 def init_deepl():
-    auth_key = os.environ["DEEPL_API_KEY"]
+    auth_key: str = os.environ["DEEPL_API_KEY"]
     translator = deepl.Translator(auth_key)
     return translator
 
 # checks the usage of the DeepL free API calls
-def api_check(translator):
+def api_check(translator) -> None:
     usage = translator.get_usage()
     if usage.any_limit_reached:
-        print("This DeepL API key has reached its usage limit.")
+        print(
+            "This DeepL API key has reached its usage limit."
+        )
         sys.exit(1)
     else:
-        print(f"Usage: {usage.character.count} / {usage.character.limit}")
+        print(
+            f"Usage: {usage.character.count} / {usage.character.limit}"
+        )
         sys.exit(1)
 
 # based on the flag set by the first argument, text is translated as single
 # words or as strings built by successive script args, API usage can
 # also be shown
-def trans_input(translator, flag):
+def trans_input(translator, flag) -> str:
     if flag == "USAGE":
         api_check(trans)
-    if len(sys.argv) == 3:
-        newword = translator.translate_text(
-            sys.argv[2],
-            target_lang=flag
-        )
-        return newword
+    newword: str = translator.translate_text(
+        sys.argv[2],
+        target_lang=flag
+    )
+    return newword
 
 if __name__ == "__main__":
-    flag = arg_check()
+    flag: str = arg_check()
     trans = init_deepl()
-    output = trans_input(trans, flag)
+    output: str = trans_input(trans, flag)
 
     print(output)
