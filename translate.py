@@ -5,8 +5,8 @@ import os, sys
 # check if deepl api is installed, if not exit
 try:
     import deepl
-except:
-    print("Error: Script requires the deepl api package")
+except ImportError:
+    print("Error: Script requires pip packages that are missing: deepl")
     sys.exit(1)
 
 # first argument determines which way the translation goes, 'es' for english
