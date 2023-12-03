@@ -1,23 +1,23 @@
-#!/bin/bash
+#!/bin/sh
 
 SCRIPT='translate.py'
-SCRIPTPATH="$HOME/.local/bin/tran"
+SCRIPTPATH="${HOME}/.local/bin/tran"
 
 # If file exists, remove it, if it doesn't, copy it over.
-if [ -f "$SCRIPTPATH" ]; then
-	echo "Uninstalling quicktranslate script"
-	rm "$SCRIPTPATH"
-	if [ ! -f "$SCRIPTPATH" ]; then
-		echo "Script successfully uninstalled!"
+if [ -f "${SCRIPTPATH}" ]; then
+	printf "Uninstalling quicktranslate script\n"
+	rm "${SCRIPTPATH}"
+	if [ ! -f "${SCRIPTPATH}" ]; then
+		printf "Script successfully uninstalled!\n"
 	else
-		echo "Error: Uninstallation failed"
+		printf "Error: Uninstallation failed\n"
 	fi
-elif [ ! -f "$SCRIPTPATH" ]; then
-	echo "Installing quicktranslate script"
-	cp "$SCRIPT" "$SCRIPTPATH"
-	if [ -f "$SCRIPTPATH" ]; then
-		echo "Script successfully installed!"
+elif [ ! -f "${SCRIPTPATH}" ]; then
+	printf "Installing quicktranslate script\n"
+	cp "${SCRIPT}" "${SCRIPTPATH}"
+	if [ -f "${SCRIPTPATH}" ]; then
+		printf "Script successfully installed!\n"
 	else
-		echo "Error: installation failed"
+		printf "Error: installation failed\n"
 	fi
 fi
