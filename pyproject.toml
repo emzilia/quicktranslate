@@ -1,0 +1,21 @@
+[project]
+name = "quicktranslate"
+version = "0.1.0"
+description = "Translate text on the command-line with the DeepL API"
+authors = [
+    {name = "emzilia",email = "you@example.com"}
+]
+license = {text = "GPL-3.0"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "deepl (>=1.18.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[project.scripts]
+trans = "quicktranslate.cli:app.arg_check"
