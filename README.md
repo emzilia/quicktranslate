@@ -15,3 +15,7 @@ example input:
 output:    
 ```Oye, mira esto que acabo de hacer```    
 
+example input:    
+```tran se "Me gusta mirar las flores después del trabajo."```    
+output:    
+```I like to look at flowers after work```    
