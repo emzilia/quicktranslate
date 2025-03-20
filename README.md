@@ -1,14 +1,13 @@
 # quicktranslate   
-Translate to Spanish from English or vice versa from the command line using the DeepL API.    
+Translate to or from Spanish/English in the command line using the DeepL API.    
 
 ### to install   
-First, read the ```install.sh``` file to see what it's doing to your system.     
-Then, run the file with ```bash install.sh``` while within the repo directory.     
-The ```install.sh``` can be run a second time to remove the file from your ```$HOME/.local/bin```    
+The recommended installation method is via ```pipx```, which greatly improves the UX of installing and managing python CLI apps; it can be found in the repos of most major distributions. After it's been installed, you can install quicktranslate by executing this command within your terminal:   
+```pipx install git+https://github.com/emzilia/quicktranslate.git```   
 
 ### to use   
 ```
-Usage: tran [option] <word or phrase to translate in quotes>
+Usage: trans [option] <word or phrase to translate in quotes>
 Translates the quoted input text from Spanish to English or vice versa
 or show API key usage.
   Options:
@@ -17,3 +16,11 @@ or show API key usage.
     -u, --usage	    Shows DeepL API key usage
     -h, --help	    Shows this help message
 ```   
+
+### in action   
+```
+> $ trans -es "Please help, they keep me in a small box"
+Por favor ayuda, me tienen en una pequeña caja
+> $ trans -se "No te preocupes, esto sólo mejora"
+Don't worry, it only gets better
+```
