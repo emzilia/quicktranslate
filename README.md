@@ -2,7 +2,7 @@
 Translate to or from Spanish/English in the command line using the DeepL API.    
 
 ### to install   
-The recommended installation method is via ```pipx```, which greatly improves the UX of installing and managing python CLI apps; it can be found in the repos of most major distributions. After it's been installed, you can install quicktranslate by executing this command within your terminal:   
+The recommended installation method is via [pipx](https://github.com/pypa/pipx), which greatly improves the UX of installing and managing python CLI apps; it can be found in the repos of most major distributions. After it's been installed, you can install quicktranslate by executing this command within your terminal:   
 ```pipx install git+https://github.com/emzilia/quicktranslate.git```   
 
 ### to use   
