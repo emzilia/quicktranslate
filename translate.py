@@ -40,14 +40,14 @@ def init_deepl():
 # words or as strings built by successive script args
 def trans_input(translator, flag):
     if len(sys.argv) == 3:
-        newword = translator.translate_text(f"{sys.argv[1]}",
+        newword = translator.translate_text(sys.argv[2],
                                                 target_lang=flag)
         return newword
     else:
         phrase = ''
         for word in sys.argv[2:]:
             phrase += word + ' '
-        newphrase = translator.translate_text(f"{phrase}", 
+        newphrase = translator.translate_text(phrase, 
                                               target_lang=flag)
         return newphrase
 
