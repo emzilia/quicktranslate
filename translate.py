@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 
-import deepl, os, sys
+import os, sys
+
+# check if deepl api is installed, if not exit
+try:
+    import deepl
+except:
+    print("Error: Script requires the deepl api package")
+    sys.exit(1)
 
 # first argument determines which way the translation goes, 'es' for english
 # to spanish or 'se' for spanish to english, 'usage' shows api key usage.
@@ -22,7 +29,7 @@ def arg_check() -> str:
         sys.exit(1)
     elif len(sys.argv) > 3:
         print(
-            "Error: This program doesn't support more than one block "
+            "Error: This script doesn't support more than one block "
             "of quotes at a time"
         )
         sys.exit(1)
