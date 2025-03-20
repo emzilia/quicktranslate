@@ -2,7 +2,7 @@
 
 import deepl, os, sys
 
-# limits input to save on api calls, first argument determines which way
+# first argument determines which way
 # the translation goes, 'es' for english to spanish or 'se' for spanish to english
 # 'usage' shows api key usage.
 def arg_check() -> str:
@@ -18,7 +18,7 @@ def arg_check() -> str:
         sys.exit(1)
     elif len(sys.argv) == 2 and sys.argv[1] != 'usage':
         print(
-            "Error: Invalid 2nd argument. Valid arguments: es, se, usage"
+            "Error: Invalid 1st argument or no text to translate"
         )
         sys.exit(1)
     elif len(sys.argv) > 3:
