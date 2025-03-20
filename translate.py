@@ -7,7 +7,7 @@ import deepl, os, sys
 def arg_check() -> str:
     if len(sys.argv) == 1:
         print(
-            "Usage: tran se \"<word of phrase>\"\n\t"
+            "Usage: tran se \"<word or phrase>\"\n\t"
             "Translates the quoted input text from Spanish to English\n"
             "       tran es \"<word or phrase>\"\n\t"
             "Translates the quoted input text from English to Spanish\n"
@@ -15,7 +15,7 @@ def arg_check() -> str:
             "Shows DeepL API key usage (no quotes)"
         )
         sys.exit(1)
-    elif len(sys.argv) == 2:
+    elif len(sys.argv) == 2 and sys.argv[1] != 'usage':
         print(
             "Error: This program requires at least two arguments to "
             "function"
