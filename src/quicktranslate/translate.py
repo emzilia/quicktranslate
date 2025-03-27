@@ -63,7 +63,12 @@ class Trans():
             sys.exit(1)
 
         # requires a DeepL api key, which is free to acquire, set as an env variable
-        auth_key: str = os.environ["DEEPL_API_KEY"]
+        try:
+            auth_key: str = os.environ["DEEPL_API_KEY"]
+        except:
+            print("Error: DEEPL_API_KEY environ unset")
+            sys.exit(1)
+
         trans = deepl.Translator(auth_key)
 
         if len(sys.argv) == 1:
